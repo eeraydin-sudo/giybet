@@ -1,4 +1,4 @@
-# Oyun Tasarım Belgesi: Gıybet 🎭
+# Oyun Tasarım Belgesi: Gıybet Online 🎭
 
 **Platform & Mimari:** Çok Oyunculu Web Oyunu (Sıra Bazlı)
 **Teknoloji Yığını:** Render (Python/Flask/FastAPI & Socket.io Backend) + Vercel (Frontend)
@@ -14,7 +14,7 @@ Oyunda ayakta kalmak ve rakipleri ezmek için iki temel dinamik yönetilir:
 
 ## 2. Harita ve Alan Kontrolü
 Klasik arsalar yerine şehrin seçkin **Lüks Mekanları** (Golf Kulübü, Opera Binası, Lüks Restoran, Yat Limanı vb.) bulunur.
-* **Muhbir Sistemi (Ev/Otel Dikme Mantığı):** Oyuncular renk veya bölge seti tamamlamak zorunda kalmadan, satın aldıkları mekanlara TL harcayarak **"Muhbir"** yerleştirebilir.
+* **Muhbir Sistemi:** Oyuncular renk veya bölge seti tamamlamak zorunda kalmadan, satın aldıkları mekanlara TL harcayarak **"Muhbir"** yerleştirebilir.
 * **Gelişim Sınırı:** Her tur, sahip olunan mekana en fazla 1 muhbir eklenebilir. Muhbir sayısı arttıkça, o mekana basan rakiplerin yakalanma riski artar.
 
 ## 3. Temel Oynanış ve Ceza Mekaniği
@@ -25,13 +25,13 @@ Rakibin kontrol ettiği ve muhbirlerinin olduğu bir mekana giren oyuncu tehlike
 ## 4. İnteraktivite ve Blöf Döngüsü (Sosyete Mahkemesi)
 Oyunun kalbi, sıra dışı pazarlık ve psikolojik savaş mekaniğidir:
 * **Gizli Kumpas:** Mekanlara yerleştirilen muhbirlerin sayısı rakiplerden gizlenebilir.
-* **Şantaj Kartları:** Haritadaki özel karelerden toplanan ve elde kapalı tutulan dedikodu kartlarıdır. Bazıları yıkıcı etkilere sahipken, bazıları tamamen "Boş Dedikodu"dur.
-* **Restleşme Aşaması (Yüzleşme):** 1.  **Tehdit:** Mekan sahibi, kurbandan zar atmasını engellemek karşılığında "Sus Payı" (TL) talep eder. Elindeki kapalı kartı öne sürüp "Seni bitirecek belgem var" blöfü yapabilir.
-    2.  **Karar:** Kurban ya boyun eğip TL öder ya da "Blöf Yapıyorsun, Göster!" diyerek rest çeker.
-    3.  **Sonuç:** Blöfse (mekan boş/kart sahteyse), mekan sahibi rezil olur ve ağır İP kaybeder. Tehdit gerçekse, kurban hem kartın cezasını yer hem de zar atma zorunluluğuyla baş başa kalır.
+* **Şantaj Kartları:** Haritadaki özel karelerden toplanan ve elde kapalı tutulan dedikodu kartlarıdır. Bazıları yıkıcı etkilere sahipken, bazıları "Boş Dedikodu"dur.
+* **Restleşme Aşaması (Yüzleşme):** 1. **Tehdit:** Mekan sahibi, kurbandan zar atmasını engellemek karşılığında "Sus Payı" (TL) talep eder. Elindeki kapalı kartı öne sürüp "Seni bitirecek belgem var" blöfü yapabilir.
+    2. **Karar:** Kurban ya boyun eğip TL öder ya da "Blöf Yapıyorsun, Göster!" diyerek rest çeker.
+    3. **Sonuç:** Blöfse (mekan boş/kart sahteyse), mekan sahibi rezil olur ve ağır İP kaybeder. Tehdit gerçekse, kurban hem kartın cezasını yer hem de zorlu bir skandal zarı atmak zorunda kalır.
 
 ## 5. Özel Durumlar ve Oyun Sonu
-* **Hapis Mekaniği - "Linçlenme / Taşra Sürgünü":** Üst üste kötü zar atan veya ağır bir skandal kartı yiyen oyuncu sosyal medyada linç edilir. Bir süreliğine taşra evine sürgüne gönderilir, turlarını pas geçer ve müdahale edemez.
+* **Hapis Mekaniği - "Linçlenme / Taşra Sürgünü":** Üst üste kötü zar atan veya ağır bir skandal kartı yiyen oyuncu sosyal medyada linç edilir. Bir süreliğine taşra evine sürgüne gönderilir, turlarını pas geçer ve dedikodulara müdahale edemez.
 * **Oyunun Sonu - "Sezon Finali":** Kısır döngüleri engellemek için oyun **Tur Sınırı** (Örn: Lobi ekranında belirlenen 20, 30 veya 50 tur) ile oynanır. Sınır dolduğunda en yüksek İP ve Servet kombinasyonuna sahip oyuncu "Yılın Cemiyet Lideri" olarak oyunu kazanır.
 
 ## 6. Oyun Haritası (Cemiyet Haritası)
@@ -44,12 +44,23 @@ Oyun alanı, cemiyetin prestij seviyelerine göre bölgelere ayrılmış kare bi
 4. **Skandal Patlak Verdi! (Hapse Git):** Buraya basan oyuncunun büyük bir sırrı ifşa olur ve anında "Taşra Sürgünü"ne gönderilir.
 
 **Prestij Bölgeleri (Mekan Grupları):**
-* **Bronz Bölge (Sokak Fısıltıları):** *Popüler Kahveci, Mahalle Kuaförü, Butik Spor Salonu.* (Ucuz mekanlar, düşük ceza ama muhbir ağı kurması kolay.)
-* **Gümüş Bölge (Gece Hayatı):** *Gözde Gece Kulübü, Şık Teras Bar, Gurme Restoran.* (Orta sınıf entrikalar, sık ziyaret edilen tuzaklı alanlar.)
-* **Altın Bölge (Elit Kulüpler):** *Tenis Kulübü, Golf Tesisi, Özel Sanat Galerisi.* (Pahalı mekanlar, muhbir yerleştirmek maliyetli ama İP kaybettirme riski yüksek.)
-* **Elmas Bölge (Zirve Mekanlar):** *Opera Binası, Lüks Yat Limanı, Tarihi Yalı.* (Sosyeteye yön veren alanlar. Buradaki bir skandal, rakipleri tek seferde silebilecek güce sahiptir.)
+* **Bronz Bölge (Sokak Fısıltıları):** *Popüler Kahveci, Mahalle Kuaförü, Butik Spor Salonu.*
+* **Gümüş Bölge (Gece Hayatı):** *Gözde Gece Kulübü, Şık Teras Bar, Gurme Restoran.*
+* **Altın Bölge (Elit Kulüpler):** *Tenis Kulübü, Golf Tesisi, Özel Sanat Galerisi.*
+* **Elmas Bölge (Zirve Mekanlar):** *Opera Binası, Lüks Yat Limanı, Tarihi Yalı.*
 
 **Özel Kareler (Aksiyon Kareleri):**
-* **Paparazzi Pususu:** Basan oyuncu bir "Dedikodu Kartı" çeker (O an etki eden rastgele olaylar).
-* **Fısıltı Gazetesi / Özel Dedektif:** Basan oyuncu gizli bir "Şantaj Kartı" çeker (Elde tutup istediği zaman kullanabileceği, blöf yapmaya yarayan kartlar).
+* **Paparazzi Pususu:** Basan oyuncu anında etki eden rastgele bir olay (Dedikodu Kartı) çeker.
+* **Fısıltı Gazetesi:** Basan oyuncu gizli bir "Şantaj Kartı" çeker ve envanterine ekler.
 * **PR Ajansı Faturası:** Kriz yönetimi için kasaya yüklü miktarda mecburi TL ödenir.
+
+## 7. Bir Oyuncunun Tur Akışı (Turn Flow)
+Arka plandaki motorun (Backend) sırayı yönetmesi için her oyuncunun turu 4 faza ayrılır:
+
+* **Faz 1: Zar ve Hareket (Zorunlu):** Oyuncu zar atar ve ilerler. (Taşra Sürgünü'ndeyse sadece çıkmak için şans zarı atar).
+* **Faz 2: Kare Etkileşimi / Karşılaşma (Zorunlu):** Piyonun durduğu kareye göre anında tetiklenir:
+  * *Sahipsiz Mekan:* TL ödenerek mekan kontrol altına alınır.
+  * *Özel Kare:* İlgili kart çekilir ve olay çözülür.
+  * *Rakibin Mekanı (Sosyete Mahkemesi):* Mekan sahibi ile kurban arasındaki "Sus Payı / Blöf / Restleşme / Zar Atma" döngüsü yaşanır.
+* **Faz 3: Yatırım ve Entrika (İsteğe Bağlı):** Faz 2'deki olası para kayıplarından sonra oyuncu, cüzdanında kalan TL ile sahip olduğu *herhangi bir mekana* (üstünde durmasa bile) 1 muhbir yerleştirebilir. Elindeki gizli şantaj kartlarını stratejik olarak kullanabilir.
+* **Faz 4: Turu Devretme (Zorunlu):** Oyuncu hamlelerini tamamlar ve sırayı bir sonraki kişiye devreder.
