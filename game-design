@@ -1,0 +1,35 @@
+# Oyun Tasarım Belgesi: Gıybet
+
+**Platform & Mimari:** Çok Oyunculu Web Oyunu (Sıra Bazlı)
+**Teknoloji Yığını:** Render (Python/Flask/FastAPI & Socket.io Backend) + Vercel (Frontend)
+**Tür:** Sosyal Çıkarım (Social Deduction), Strateji, Kutu Oyunu
+**Tema:** Yüksek Sosyete, Dedikodu, Şantaj ve İtibar Savaşları
+
+---
+
+## 1. Temel Kaynaklar (Ekonomi)
+Oyunda ayakta kalmak ve rakipleri ezmek için iki temel dinamik yönetilir:
+* **İtibar Puanı (İP):** Oyuncunun "Can Barı"dır. İP'si sıfırlanan oyuncu sosyeteden aforoz edilir ve elenir.
+* **Servet (TL):** Şantaj yapmak, rüşvet vermek ve muhbir ağını genişletmek için kullanılan harcama birimidir.
+
+## 2. Harita ve Alan Kontrolü
+Klasik arsalar yerine şehrin seçkin **Lüks Mekanları** (Golf Kulübü, Opera Binası, Lüks Restoran, Yat Limanı vb.) bulunur.
+* **Muhbir Sistemi (Ev/Otel Dikme Mantığı):** Oyuncular renk veya bölge seti tamamlamak zorunda kalmadan, satın aldıkları mekanlara TL harcayarak **"Muhbir"** yerleştirebilir.
+* **Gelişim Sınırı:** Her tur, sahip olunan mekana en fazla 1 muhbir eklenebilir. Muhbir sayısı arttıkça, o mekana basan rakiplerin yakalanma riski artar.
+
+## 3. Temel Oynanış ve Ceza Mekaniği
+Rakibin kontrol ettiği ve muhbirlerinin olduğu bir mekana giren oyuncu tehlikededir:
+* **Skandaldan Sıyrılma Zarı:** Oyuncu, ifşa olmamak için zar atmak zorundadır.
+* **Skandal Eşiği:** Zarın geçmesi gereken zorluk derecesi, mekandaki gizli/açık muhbir sayısına göre belirlenir. Zar başarısız olursa oyuncu İP kaybeder.
+
+## 4. İnteraktivite ve Blöf Döngüsü (Sosyete Mahkemesi)
+Oyunun kalbi, sıra dışı pazarlık ve psikolojik savaş mekaniğidir:
+* **Gizli Kumpas:** Mekanlara yerleştirilen muhbirlerin sayısı rakiplerden gizlenebilir.
+* **Şantaj Kartları:** Haritadaki özel karelerden toplanan ve elde kapalı tutulan dedikodu kartlarıdır. Bazıları yıkıcı etkilere sahipken, bazıları tamamen "Boş Dedikodu"dur.
+* **Restleşme Aşaması (Yüzleşme):** 1.  **Tehdit:** Mekan sahibi, kurbandan zar atmasını engellemek karşılığında "Sus Payı" (TL) talep eder. Elindeki kapalı kartı öne sürüp "Seni bitirecek belgem var" blöfü yapabilir.
+    2.  **Karar:** Kurban ya boyun eğip TL öder ya da "Blöf Yapıyorsun, Göster!" diyerek rest çeker.
+    3.  **Sonuç:** Blöfse (mekan boş/kart sahteyse), mekan sahibi rezil olur ve ağır İP kaybeder. Tehdit gerçekse, kurban hem kartın cezasını yer hem de zar atma zorunluluğuyla baş başa kalır.
+
+## 5. Özel Durumlar ve Oyun Sonu
+* **Hapis Mekaniği - "Linçlenme / Taşra Sürgünü":** Üst üste kötü zar atan veya ağır bir skandal kartı yiyen oyuncu sosyal medyada linç edilir. Bir süreliğine taşra evine sürgüne gönderilir, turlarını pas geçer ve müdahale edemez.
+* **Oyunun Sonu - "Sezon Finali":** Kısır döngüleri engellemek için oyun **Tur Sınırı** (Örn: Lobi ekranında belirlenen 20, 30 veya 50 tur) ile oynanır. Sınır dolduğunda en yüksek İP ve Servet kombinasyonuna sahip oyuncu "Yılın Cemiyet Lideri" olarak oyunu kazanır.
