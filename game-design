@@ -1,4 +1,4 @@
-# Oyun Tasarım Belgesi: Gıybet
+# Oyun Tasarım Belgesi: Gıybet 🎭
 
 **Platform & Mimari:** Çok Oyunculu Web Oyunu (Sıra Bazlı)
 **Teknoloji Yığını:** Render (Python/Flask/FastAPI & Socket.io Backend) + Vercel (Frontend)
@@ -33,3 +33,23 @@ Oyunun kalbi, sıra dışı pazarlık ve psikolojik savaş mekaniğidir:
 ## 5. Özel Durumlar ve Oyun Sonu
 * **Hapis Mekaniği - "Linçlenme / Taşra Sürgünü":** Üst üste kötü zar atan veya ağır bir skandal kartı yiyen oyuncu sosyal medyada linç edilir. Bir süreliğine taşra evine sürgüne gönderilir, turlarını pas geçer ve müdahale edemez.
 * **Oyunun Sonu - "Sezon Finali":** Kısır döngüleri engellemek için oyun **Tur Sınırı** (Örn: Lobi ekranında belirlenen 20, 30 veya 50 tur) ile oynanır. Sınır dolduğunda en yüksek İP ve Servet kombinasyonuna sahip oyuncu "Yılın Cemiyet Lideri" olarak oyunu kazanır.
+
+## 6. Oyun Haritası (Cemiyet Haritası)
+Oyun alanı, cemiyetin prestij seviyelerine göre bölgelere ayrılmış kare bir tahta düzenindedir. 
+
+**Köşe Kareleri (Ana Aksiyon Alanları):**
+1. **Başlangıç (Cemiyete Takdim):** Buradan her geçişte oyuncuya "Sezonluk Gelir" (TL) ve taze "İtibar" (İP) eklenir.
+2. **Taşra Sürgünü (Hapis):** Linç edilenlerin turlarını boşa harcadığı ceza köşesi.
+3. **VIP Lounge (Güvenli Bölge):** Hiçbir muhbirin giremediği, oyuncuların rahat nefes alıp ceza ödemediği prestijli köşe.
+4. **Skandal Patlak Verdi! (Hapse Git):** Buraya basan oyuncunun büyük bir sırrı ifşa olur ve anında "Taşra Sürgünü"ne gönderilir.
+
+**Prestij Bölgeleri (Mekan Grupları):**
+* **Bronz Bölge (Sokak Fısıltıları):** *Popüler Kahveci, Mahalle Kuaförü, Butik Spor Salonu.* (Ucuz mekanlar, düşük ceza ama muhbir ağı kurması kolay.)
+* **Gümüş Bölge (Gece Hayatı):** *Gözde Gece Kulübü, Şık Teras Bar, Gurme Restoran.* (Orta sınıf entrikalar, sık ziyaret edilen tuzaklı alanlar.)
+* **Altın Bölge (Elit Kulüpler):** *Tenis Kulübü, Golf Tesisi, Özel Sanat Galerisi.* (Pahalı mekanlar, muhbir yerleştirmek maliyetli ama İP kaybettirme riski yüksek.)
+* **Elmas Bölge (Zirve Mekanlar):** *Opera Binası, Lüks Yat Limanı, Tarihi Yalı.* (Sosyeteye yön veren alanlar. Buradaki bir skandal, rakipleri tek seferde silebilecek güce sahiptir.)
+
+**Özel Kareler (Aksiyon Kareleri):**
+* **Paparazzi Pususu:** Basan oyuncu bir "Dedikodu Kartı" çeker (O an etki eden rastgele olaylar).
+* **Fısıltı Gazetesi / Özel Dedektif:** Basan oyuncu gizli bir "Şantaj Kartı" çeker (Elde tutup istediği zaman kullanabileceği, blöf yapmaya yarayan kartlar).
+* **PR Ajansı Faturası:** Kriz yönetimi için kasaya yüklü miktarda mecburi TL ödenir.
